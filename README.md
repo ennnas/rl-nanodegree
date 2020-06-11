@@ -3,9 +3,11 @@
 [![Python 3.7](https://img.shields.io/badge/Python-3.7-green.svg)](https://shields.io/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-This repository contains the notebooks, exercises and projects that I have developed during the Udacity
+This repository contains the notebooks, lab exercises and projects that I have developed during the Udacity
 [Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) program.
 
+In the [notebooks](notebooks) folder you can find all the Jupyter Notebooks completed throughout the nanodegree.
+In the [labs](labs) folder you can find the scripts that were used to complete workspace exercises.  
 ## Development setup
 
 To run all the code available in this repo you need to install the following software:
