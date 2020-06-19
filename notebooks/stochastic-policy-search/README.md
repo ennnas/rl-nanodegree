@@ -10,6 +10,9 @@
 Policy-based methods are a family of methods that learn to estimate the optimal policy
 &pi;<top>* without the need of going through the estimation of the optimal action value function Q<top>*(s, a)
 
+Policy-based methods can learn either stochastic or deterministic policies, and they can be used to 
+solve environments with either finite or continuous action spaces.This family of methods is particularly suitable when dealing with a continuous action space, since the 
+output is already the value or probability of an action. 
 
 Stochastic policy based methods learn the optimal policy &pi;<top>* via current policy perturbation.
 The idea is to evaluate slightly different policy and compare the new expected return *J<top>'* with the
