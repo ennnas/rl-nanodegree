@@ -14,7 +14,7 @@ def hidden_init(layer):
 class Actor(nn.Module):
     """Actor (Policy) Model. Provides the next action to take"""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=256, fc2_units=128):
+    def __init__(self, state_size, action_size, seed, fc1_units=128, fc2_units=128):
         """Initialize parameters and build model.
         Params
         ======
@@ -38,15 +38,15 @@ class Actor(nn.Module):
 
     def forward(self, state):
         """Build an actor (policy) network that maps states -> actions."""
-        x = F.relu(self.dp1(self.fc1(state)))
-        x = F.relu(self.dp2(self.fc2(x)))
+        x = F.relu(self.fc1(state))
+        x = F.relu(self.fc2(x))
         return torch.tanh(self.fc3(x))
 
 
 class Critic(nn.Module):
     """Critic (Value) Model. Estimates the state-value function Q(S, A)"""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=256, fc2_units=128):
+    def __init__(self, state_size, action_size, seed, fcs1_units=128, fc2_units=128):
         """Initialize parameters and build model.
         Params
         ======
@@ -70,7 +70,7 @@ class Critic(nn.Module):
 
     def forward(self, state, action):
         """Build a critic (value) network that maps (state, action) pairs -> Q-values."""
-        xs = F.relu(self.dp1(self.fcs1(state)))
+        xs = F.relu(self.fcs1(state))
         x = torch.cat((xs, action), dim=1)
         x = F.relu(self.fc2(x))
         return self.fc3(x)
