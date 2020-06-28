@@ -16,6 +16,24 @@ torchviz = "^0.0.1"
 version_information = "^1.0.3"
 
 [tool.poetry.dev-dependencies]
+black = "^19.10b0"
+
+[tool.black]
+line-length = 100
+exclude = '''
+(
+    \.DS_Store |
+    \.githooks |
+    \.html$ |
+    \.idea |
+    \.json$ |
+    \.pyc$ |
+    \.sql$ |
+    \.vscode |
+    \.venv |
+    node_modules
+)
+'''
 
 [build-system]
 requires = ["poetry>=0.12"]

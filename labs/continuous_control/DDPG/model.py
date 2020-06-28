@@ -12,9 +12,9 @@ def hidden_init(layer):
 
 
 class Actor(nn.Module):
-    """Actor (Policy) Model. Provides the next action to take"""
+    """Actor (Policy) Model."""
 
-    def __init__(self, state_size, action_size, seed, fc1_units=96, fc2_units=96):
+    def __init__(self, state_size, action_size, seed, fc1_units=400, fc2_units=300):
         """Initialize parameters and build model.
         Params
         ======
@@ -29,6 +29,7 @@ class Actor(nn.Module):
         self.fc1 = nn.Linear(state_size, fc1_units)
         self.fc2 = nn.Linear(fc1_units, fc2_units)
         self.fc3 = nn.Linear(fc2_units, action_size)
+        self.reset_parameters()
 
     def reset_parameters(self):
         self.fc1.weight.data.uniform_(*hidden_init(self.fc1))
@@ -43,9 +44,9 @@ class Actor(nn.Module):
 
 
 class Critic(nn.Module):
-    """Critic (Value) Model. Estimates the state-value function Q(S, A)"""
+    """Critic (Value) Model."""
 
-    def __init__(self, state_size, action_size, seed, fcs1_units=96, fc2_units=96):
+    def __init__(self, state_size, action_size, seed, fcs1_units=400, fc2_units=300):
         """Initialize parameters and build model.
         Params
         ======
