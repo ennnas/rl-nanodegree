@@ -671,7 +671,7 @@ six = ">=1.9"
 [[package]]
 category = "main"
 description = "Run a subprocess in a pseudo terminal"
-marker = "sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\""
+marker = "python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\" or os_name != \"nt\" or python_version >= \"3.3\" and sys_platform != \"win32\" and (python_version >= \"3.3\" and sys_platform != \"win32\" or sys_platform != \"win32\")"
 name = "ptyprocess"
 optional = false
 python-versions = "*"
@@ -996,6 +996,14 @@ tensorflow = "1.7.1"
 
 [[package]]
 category = "main"
+description = "Version information:"
+name = "version-information"
+optional = false
+python-versions = "*"
+version = "1.0.3"
+
+[[package]]
+category = "main"
 description = "Measures the displayed width of unicode strings in a terminal"
 name = "wcwidth"
 optional = false
@@ -1050,7 +1058,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "59ccb7861b4808b56e7f67875ec4331c0df852cd88993cd8d99bf450d41cdaee"
+content-hash = "8dba9c03e0e77f83a6b574d9cc3f96e488c6e1bb8a4ef5dddc9c82d7bbafec4f"
 python-versions = "^3.6.8"
 
 [metadata.files]
@@ -1611,6 +1619,9 @@ traitlets = [
 unityagents = [
     {file = "unityagents-0.4.0-py3-none-any.whl", hash = "sha256:0b54bcd452e3910b3c64b16c48e76f28e656120bf6bafaa5dff556e996c4cf85"},
     {file = "unityagents-0.4.0.tar.gz", hash = "sha256:7c3154f6b9cc7f6b1d66492fdd4252a02208cbc590b759709aae47a81b793dc9"},
+]
+version-information = [
+    {file = "version_information-1.0.3.tar.gz", hash = "sha256:811b9cea4b376aa62a77dc729a937ce8e2844573b8686b5c1840147054fb938d"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
