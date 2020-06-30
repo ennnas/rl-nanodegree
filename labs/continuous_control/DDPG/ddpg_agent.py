@@ -22,7 +22,7 @@ N_UPDATES_PER_STEP = 10   # number of updates to perform at each learning step
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-class Agent():
+class Agent:
     """Interacts with and learns from the environment."""
 
     def __init__(self, n_agents, state_size, action_size, random_seed):
@@ -56,7 +56,7 @@ class Agent():
         self.memory = ReplayBuffer(action_size, BUFFER_SIZE, BATCH_SIZE, random_seed)
 
         # Initialize time step (for updating every UPDATE_EVERY steps)
-        self.t_step = 0
+        self.timestep = 0
 
     def step(self, states, actions, rewards, next_states, dones):
         """Save experience in replay memory, and use random sample from buffer to learn."""
@@ -64,13 +64,12 @@ class Agent():
         self.memory.add(states, actions, rewards, next_states, dones)
 
         # Learn every UPDATE_EVERY time steps.
-        self.t_step = (self.t_step + 1) % UPDATE_EVERY
-        if self.t_step == 0:
-            # If enough samples are available in memory, get random subset and learn
-            if len(self.memory) > BATCH_SIZE:
-                for _ in range(N_UPDATES_PER_STEP):
-                    experiences = self.memory.sample()
-                    self.learn(experiences, GAMMA)
+        self.timestep = (self.timestep + 1) % UPDATE_EVERY
+        # If enough samples are available in memory, get random subset and learn
+        if len(self.memory) > BATCH_SIZE and self.timestep == 0:
+            for _ in range(N_UPDATES_PER_STEP):
+                experiences = self.memory.sample()
+                self.learn(experiences, GAMMA)
 
     def act(self, states, add_noise=True):
         """Returns actions for given states as per current policy."""
