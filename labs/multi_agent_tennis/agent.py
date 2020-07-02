@@ -11,7 +11,8 @@ import torch.optim as optim
 LR_ACTOR = 5e-4           # learning rate of the actor
 LR_CRITIC = 5e-4          # learning rate of the critic
 WEIGHT_DECAY = 0          # L2 weight decay
-TAU = 1e-3                # for soft update of target parameters
+TAU = 3e-3                # for soft update of target parameters
+GRAD_CLIP = 1             # Value at which clip the gradient during backprop
 
 
 class Agent:
@@ -71,17 +72,12 @@ class Agent:
         # ---------------------------- data prep -------------------------------- #
         batch_size = states.shape[0]
 
-        own_next_states = next_states[:, self.agent_id, :].reshape(batch_size, -1)
-        own_states = states[:, self.agent_id, :].reshape(batch_size, -1)
+        own_next_states = next_states[:, self.agent_id]
+        own_states = states[:, self.agent_id]
 
-        if self.agent_id == 0:
-            other_actions = actions[:, 2:]
-            own_rewards = rewards[:, :1]
-            own_dones = dones[:, :1]
-        else:
-            other_actions = actions[:, :2]
-            own_rewards = rewards[:, 1:]
-            own_dones = dones[:, 1:]
+        other_actions = actions[:, 2:] if self.agent_id == 0 else actions[:, :2]
+        own_rewards = rewards[:, self.agent_id].unsqueeze(1)
+        own_dones = dones[:, self.agent_id].unsqueeze(1)
 
         # flatten for input
         states = states.reshape(batch_size, -1)
@@ -108,7 +104,7 @@ class Agent:
         # Minimize the loss
         self.critic_optimizer.zero_grad()
         critic_loss.backward()
-        torch.nn.utils.clip_grad_norm_(self.critic.parameters(), 1)
+        torch.nn.utils.clip_grad_norm_(self.critic.parameters(), GRAD_CLIP)
 
         self.critic_optimizer.step()
 

@@ -1,16 +1,13 @@
 import logging
 from agent import Agent
-import torch
-from torch.nn import functional as F
 from utils import ReplayBuffer, permute
 import numpy as np
 
 BUFFER_SIZE = int(1e5)    # replay buffer size
 BATCH_SIZE = 256          # minibatch size
-GAMMA = 0.99                # discount factor
+GAMMA = 0.99              # discount factor
 UPDATE_EVERY = 1          # how often to update the network
-EPSILON_DECAY = 0.9
-GRAD_CLIP = 1
+EPSILON_DECAY = 0.9       # decay the noise factor
 
 logging.basicConfig(level=logging.INFO)
 
@@ -47,10 +44,8 @@ class MADDPG:
         for agent_id, agent in enumerate(self.agents):
             states, actions, rewards, next_states, dones = samples[agent_id]
             next_state = next_states[:, agent_id, :]
-            if agent_id == 0:
-                other_next_actions = self.agents[1].target_actor(next_state).detach()
-            else:
-                other_next_actions = self.agents[0].target_actor(next_state).detach()
+            other_agent = self.agents[1] if agent_id == 0 else self.agents[0]
+            other_next_actions = other_agent.target_actor(next_state).detach()
             agent.learn(samples[agent_id], gamma, other_next_actions)
 
 #    def update(self, samples, agent_number):
