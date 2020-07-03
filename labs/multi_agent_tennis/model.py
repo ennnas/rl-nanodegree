@@ -1,14 +1,6 @@
-import numpy as np
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
-
-def hidden_init(layer):
-    fan_in = layer.weight.data.size()[0]
-    lim = 1. / np.sqrt(fan_in)
-    return -lim, lim
 
 
 class Actor(nn.Module):
@@ -54,7 +46,7 @@ class Critic(nn.Module):
             state_size (int): Dimension of each state
             action_size (int): Dimension of each action
             seed (int): Random seed
-            fcs1_units (int): Number of nodes in the first hidden layer
+            fc1_units (int): Number of nodes in the first hidden layer
             fc2_units (int): Number of nodes in the second hidden layer
         """
         super().__init__()
