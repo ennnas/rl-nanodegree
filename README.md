@@ -7,7 +7,11 @@ This repository contains the notebooks, lab exercises and projects that I have d
 [Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) program.
 
 In the [notebooks](notebooks) folder you can find all the Jupyter Notebooks completed throughout the nanodegree.
-In the [labs](labs) folder you can find the scripts that were used to complete workspace exercises.  
+In the [labs](labs) folder you can find the implementation of graded and ungraded projects. In particular, graded projects are the following ones:
+
+* [Navigation Banana Collector](labs/navigation/README.md)
+* [Continuous Control Reacher](labs/continuous_control/README.md)
+* [Multi-Agent Tennis](labs/multi_agent_tennis/README.md)
 ## Development setup
 
 To run all the code available in this repo you need to install the following software:
